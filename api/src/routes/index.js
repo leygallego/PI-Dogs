@@ -23,7 +23,7 @@ const router = Router();
 
 
 
-router.use('/', ruta1);
+// router.use('/', ruta1);
 router.use('/dogs', ruta2);
 router.use('/dogs/:name', ruta3);
 router.use('/temperament', ruta4);

@@ -10,43 +10,89 @@ const router = Router();
 
 
 
-router.get('/',  (req, res) => {
-    // res.send('HOME DEL BACK (SOLO "/")')
-    Temperament.sync()
-        .then( async () => {
-            const allData = await Temperament.findAll()
-            if (allData > 0){
-                res.send(allData)
+// router.get('/',  (req, res) => {
+//     // res.send('HOME DEL BACK (SOLO "/")')
+//     Temperament.sync()
+//         .then( async () => {
+//             const allData = await Temperament.findAll()
+//             if (allData > 0){
+//                 res.send(allData)
 
-            } else {
+//             } else {
 
-                getTemperamentApi()
-            }
-        } )
-});
+//                 getTemperamentApi()
+//             }
+//         } )
+// });
 
-            function  getBreedApi() {
-                const url = "https://api.thedogapi.com/v1/breeds";
-                fetch(url)
-                .then((data) => data.json())
-                .then((result)=> {
-                    result.map((el)=> {
-                        Breed.sync()
-                        .then( async ()=>{
-                            const createdTemperaments = await Breed.create(
-                                {
-                            id: el.id,
-                            name: el.temperament
-                                }
-                            )
-                            console.log("Created Temperaments");
+//             function  getTemperamentApi() {
+//                 const url = "https://api.thedogapi.com/v1/breeds";
+//                 fetch(url)
+//                 .then((data) => data.json())
+//                 .then((result)=> {
+//                     result.map((el)=> {
+//                         Temperament.sync()
+//                         .then( async ()=>{
+//                             const createdTemperaments = await Temperament.create(
+//                                 {
+//                             // id: el.id,
+//                             name: el.temperament
+//                                 }
+//                             )
+//                             console.log("Created Temperaments");
 
-                        })
-                    })
-                    // res.send(createBreeds)
+//                         })
+//                     })
+//                     // res.send(createBreeds)
+//                 })
+//                 .catch(error => console.log(error)) ;
+//             }
+
+
+router.get ('/', (req, res) => {
+
+   
+    Temperament.findAll().then((temperament)=> {
+    if (temperament) {
+
+        var array = [];// array para guardar los datos seleccionados
+                temperament.map((el) => { // mapea cada elemento
+                    // console.log(el);
+                    if (el.name) {
+
+                        let datosBasicos = {
+                            // id: el.id,
+                            name: el.name
+                        }
+                        
+                    array.push(datosBasicos)
+                        //array.push(el)
+                    }
+                   
+
                 })
-                .catch(error => console.log(error)) ;
-            }
+
+                res.send(array)
+    } else {
+
+        res.status(404).send();
+
+    }
+})
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 // router.get('/',  async (req, res) => {
 //     //res.send('Desde Temperament ruta 4')
