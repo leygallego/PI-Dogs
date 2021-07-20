@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Landing from './components/Landing';
+import { applyMiddleware, createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './reducers';
+import thunk from 'redux-thunk';
+
+const crearStoreMiddleware = applyMiddleware(thunk)(createStore);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={crearStoreMiddleware(rootReducer)}>
+    <Landing />
+  </Provider>,
   document.getElementById('root')
 );
 

@@ -1,0 +1,110 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+select{
+
+    display: flex;
+    margin-left: -430px;
+    margin-top: 45px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 310px;
+     height: 55px;
+    padding: 10px 20px;
+    appearance: none;
+    /* -webkit-appearance: none;
+    -moz-appearance: none; */
+    font-family: 'Poppins',sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    background-color: #D0A9F5;
+    color: rgb(34, 8, 179);
+    border: 6px solid #D0A9F5;
+    border-radius: 5px;
+    border-width: 1px;
+
+    background-image: url("../images/arrow-down.png");
+    background-repeat: no-repeat;
+    background-size: 47px;
+    background-position: 257px 0.5px;
+    outline: none;
+    box-shadow: 0 0 20px rgba(20,20,30,0.25);
+    
+}
+select::-ms-expand{
+    display: none;
+}
+/* select:hover{
+    border: 6px solid rgb(34, 8, 179);
+} */
+select option{
+    background-color: #D0A9F5;
+    letter-spacing: 1.2px;
+    font-weight: 400;
+    font-size: 18px;
+}
+.selected{
+    display: none;
+}
+
+
+.css-input {
+    display: flex;
+    margin-top: 100px;
+     margin-left: 50px;
+     width: 310px;
+     height: 55px;
+     font-size: 16px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+     padding: 5px;
+     background-color: #D0A9F5;
+     color: rgb(34, 8, 179);
+     border: 6px solid #ff0067;
+     border-radius: 5px;
+     border-width: 1px;
+     border-style: solid;
+     /* background-image: url("../images/Button.png"); */
+    background-repeat: no-repeat;
+    background-size: 47px;
+    background-position: 267px 0.5px;
+    outline: none;
+     box-shadow: 0 0 20px rgba(20,20,30,0.25);
+    
+}
+ .css-input:focus {
+     outline:none;
+}
+
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color: #FF0000;
+	font-family:Georgia;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 10px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	background-color:#f6f6f6;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}

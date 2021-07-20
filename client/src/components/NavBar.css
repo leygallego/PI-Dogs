@@ -1,0 +1,16 @@
+.navBar{
+    display: flex;
+    background: transparent;
+}
+
+.active {
+    background-color: transparent;
+    color: blue;
+  }
+
+div ul li {
+    display: inline;
+    font-size: 28px;
+    text-decoration:solid;
+    padding: 10px;
+}
