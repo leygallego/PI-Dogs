@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import './Crear.css'
 
 function Crear() {
 
@@ -22,7 +23,7 @@ function Crear() {
 
     return (
 
-        <div>
+        <div className="form" >
             <h1>CREAR RAZA DE PERRO</h1>
 
             <form action="">

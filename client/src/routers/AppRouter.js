@@ -23,7 +23,11 @@ const AppRouter = () => {
 
         </Route>   
         <Route exact path="/crear" >
-        < Crear />                
+        < Crear />     
+
+        </Route>   
+        <Route exact path="/crear" >
+        < Detalle />             
 
         </Route>  
         <Route exact path="/" >

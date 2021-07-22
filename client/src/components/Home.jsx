@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './Home.css';
 import { connect } from 'react-redux';
 import    allBreeds   from '../actions';
+import Card from './Card';
 
 
 
@@ -9,13 +10,21 @@ function Home (props){
 
     useEffect(()=>{
         props.allBreeds()
-    })
+    }, []) 
     function renderBreeds() {
         return (props.breeds.map((el, index)=>{
             return (
-                <li key={index} >
-                    {el.name}
-                </li>
+                
+                    <Card 
+                key={index}
+                image={el.image}
+                name={el.name}
+                height={el.height}
+                weight={el.weight}
+                life_span={el.life_span}
+                 />
+                  
+               
             )
         }))
     }
@@ -45,13 +54,13 @@ function Home (props){
         <option value="5">Loyal</option>
     </select>
     </div>
+        <div className="tarjeta">
 
-    <div>
-        <h1>DATOS</h1>
-        <ul>
+        <div className="cardContainer" >        
             {renderBreeds()}
-        </ul>
-    </div>
+            </div>
+        </div>
+    
     
         
         </>

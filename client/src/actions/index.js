@@ -6,7 +6,7 @@ export default function showBreeds() {
         fetch('http://localhost:3001/dogs')
         .then((data) => data.json())//Los datos los pasamos a json
         .then((result) => {
-            console.log(result);
+            // console.log(result);
             dispatch ({
                 type: SHOWALL,
                 payload: result

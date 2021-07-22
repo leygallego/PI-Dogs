@@ -8,9 +8,9 @@ const NavBar = () => {
                 <li>
                     <NavLink exact to="/" activeClassName="active">Home</NavLink>
                 </li>
-                <li>
+                {/* <li>
                     <NavLink exact to="/detalle" activeClassName="active">Detalle de Raza de Perro</NavLink>
-                </li>
+                </li> */}
                 <li>
                     <NavLink exact to="/crear" activeClassName="active">Crear Raza de Perro</NavLink>
                 </li>

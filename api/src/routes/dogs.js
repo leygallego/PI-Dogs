@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router, response } = require('express');
 const fetch = require("node-fetch");
 const express = require('express');
 const { Breed, Temperament } = require('../db');
@@ -11,135 +11,6 @@ server.use(express.json());
 const router = Router();
 const { Op } = Sequelize;
 
-
-router.get('/', (req, res) => {
-
-    let { name } = req.query;
-    let filter = {};
-
-    if (name) {
-
-        filter = {
-            where: {
-                name: {
-                    [Op.like]: `$%{name}%`
-                }
-            }
-        };
-    }
-    Breed.findAll(filter).then((breed) => {
-        res.send(breed);
-    });
-});
-
-
-
-// router.get ('/', (req, res) => {
-
-//     let { name } = req.query
-//     let filter = {}
-//    if (name) {
-//        res.send(name)
-
-   
- 
-//    } else { Breed.findAll().then((breed)=> {
-//     if (breed) {
-
-//         var array = [];// array para guardar los datos seleccionados
-//     var count = 0; // contador desde la posición 0
-//     breed.map((el) => { // mapea cada elemento
-//         if (count === 8) {
-//             return
-//         }
-//         let datosSolicitados = {    //objeto con los datos escenciales
-//             // id: el.id,
-//             name: el.name,
-//             height: el.height,
-//             weight: el.weight,
-//             life_span: el.life_span,
-//             // image: el.image.url,
-//         }
-//         array.push(datosSolicitados)
-//         count++
-//     })
-
-//     res.send(array)
-
-//     } else {
-
-//         res.status(404).send();
-
-//     }
-// })}
-       
-
-// })
-
-
-router.get ('/:idRaza', (req, res) => {
-
-    let { idRaza } = req.params;
-   
-    Breed.findAll().then((breed)=> {
-    if (breed) {
-
-        var array = [];// array para guardar los datos seleccionados
-        breed.map((el) => { // mapea cada elemento
-        if (el.name === idRaza) {
-            let datosSolicitados = {    //objeto con los datos escenciales
-                // id: el.id,
-                name: el.name,
-                height: el.height,
-                weight: el.weight,
-                life_span: el.life_span,
-                // image: el.image.url,
-            }
-            array.push(datosSolicitados)
-
-        }
-        
-    })
-
-    res.send(array)
-
-    } else {
-
-        res.status(404).send();
-
-    }
-})
-
-})
-///////////////////////////////////////////////
-
-// router.get('/:name', async function (req, res) {
-//     let { name } = req.query;
-//         if (name){
-//            await fetch(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
-//         .then ((data)=> data.json())
-//         .then((result)=> {
-//             var array = [];// array para guardar los datos seleccionados
-//             result.map((el) => { // mapea cada elemento
-//                 if (el) {
-//                      let datosSolicitados = {    //objeto con los datos escenciales
-//                     id: el.id,
-//                     name: el.name,
-//                     height: el.height.metric,
-//                     weight: el.weight.metric,
-//                     life_span: el.life_span
-//                 }
-//                 array.push(datosSolicitados)
-//                     //array.push(el)
-//                 }
-//             })
-//             res.send(array)     
-//         } )
-//         .catch((error)=>res.status(401))
-//         } else {res.status(422).json({error: "No existe la raza que se ingresó"})}
-
-
-// })
 
 // router.get('/',  (req, res) => {
 //     // res.send('HOME DEL BACK (SOLO "/")')
@@ -183,242 +54,107 @@ router.get ('/:idRaza', (req, res) => {
 //                 .catch(error => console.log(error)) ;
 //             }
 
-// router.get('/dogs',  (req, res) => {
-//     res.send('Desde dogs ruta 2 ("/dogs") ')
-// });
+router.get('/', (req, res) => {
 
-// router.get('/dogs/:name',  (req, res) => {
-//     res.send('Desde params ruta 3 ("/dogs/:parámetro") ')
-// });
+    let filter = {};
+    let { name } = req.query;
 
-// router.get('/', async (req, res) => {
-//     // res.send('Desde params ruta 3 ("/dogs/:parámetro") ')
-//     //let { idRaza } = req.query;
+    if (!name) {
 
-//     Breed.findAll().then((breed)=> {
-//         if (breed) {
-//             res.json(breed);
-//         } else {
-
-//             res.status(404).send();
-
-//         }
-//     })
-
-
-//     router.get('/dogs',  (req, res) => {
-//     // res.send('Desde dogs ruta 2 ("/dogs") ')
-//         let filter = {};
-//         let { name } = request.query;
-
-//         if (name) {
-//             filter = {
-
-//                 where: {
-//                     name: {
-//                         [Op.like]: `${name}`
-//                     }
-//                 }
-//             };
-            
-//         }
-
-//         Breed.findAll(filter).then((breed)=>{
-//             res.send(breed)
-//         })
-
-// });
-
-    // if (name) {
-    //     const dataTest = await Breed.findAll({
-    //         where: {
-    //             name: Breed.name
-    //         }
-    //     })
-    //         console.log(dataTest);
-    // }
-    // res.send(dataTest)
-
-// });
-
-//TODO: implementar tolowerCase para los parámetros o querys
-//TODO: Captura de errores, corregir.
-//TODO: Revisar expresiones regulares para búsquedas parecidas ej.  escribí pinshcher y quiero que me traiga las razas parecidas
-
-
-
-// router.get('/', async function (req, res) {
-
-
-// await fetch(`https://api.thedogapi.com/v1/breeds`)
-//     .then((data) => data.json())//Los datos los pasamos a json
-//     .then((result) => { //resultado a transformar
-//         var array = [];// array para guardar los datos seleccionados
-//         var count = 0; // contador desde la posición 0
-//         result.map((el) => { // mapea cada elemento
-//             if (count === 8) {
-//                 return
-//             }
-//             let datosSolicitados = {    //objeto con los datos escenciales
-//                 id: el.id,
-//                 name: el.name,
-//                 height: el.height.metric,
-//                 weight: el.weight.metric,
-//                 life_span: el.life_span,
-//                 image: el.image.url,
-//             }
-//             array.push(datosSolicitados)
-//             count++
-//         })
-
-//         res.send(array)
-//     })
-//     .catch((err) => res.status(401))
-// })
-
-
-
-
-
-// })
-
-// router.get('/:name', async function (req, res) {
-//     let { name } = req.query;
-//         if (name){
-//            await fetch(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
-//         .then ((data)=> data.json())
-//         .then((result)=> {
-//             var array = [];// array para guardar los datos seleccionados
-//             result.map((el) => { // mapea cada elemento
-//                 if (el) {
-//                      let datosSolicitados = {    //objeto con los datos escenciales
-//                     id: el.id,
-//                     name: el.name,
-//                     height: el.height.metric,
-//                     weight: el.weight.metric,
-//                     life_span: el.life_span
-//                 }
-//                 array.push(datosSolicitados)
-//                     //array.push(el)
-//                 }
-//             })
-//             res.send(array)     
-//         } )
-//         .catch((error)=>res.status(401))
-//         } else {res.status(422).json({error: "No existe la raza que se ingresó"})}
-
-
-// })
-
-
-// router.get('/dogs/:idRaza', async (req, res) => {
-//     //res.send('Desde params ruta 3 ("/dogs/:parámetro") ')
-
-//     let { idRaza } = req.params;
+        Breed.findAll().then((breed) => {
+            if (breed) {
     
-//         await fetch(`https://api.thedogapi.com/v1/breeds`)
-//             .then((data) => data.json())
-//             .then((result) => {
-//                 var array = [];// array para guardar los datos seleccionados
-//                 result.map((el) => { // mapea cada elemento
-//                     if (el.name === idRaza) {
-//                          let datosSolicitados = {    //objeto con los datos escenciales
-//                         id: el.id,
-//                         name: el.name,
-//                         height: el.height.metric,
-//                         weight: el.weight.metric,
-//                         life_span: el.life_span
-//                     }
-//                     array.push(datosSolicitados)
-//                         //array.push(el)
-//                     }
-                   
-
-//                 })
-
-//                 res.send(array)
-
-//             })
-//             .catch((error) => res.status(401).send("Raza inexistente"))
+                var array = [];// array para guardar los datos seleccionados
+                breed.map((el) => { // mapea cada elemento
+                    if (el) {
+                        let datosSolicitados = {    //objeto con los datos escenciales
+                            // id: el.id,
+                            name: el.name,
+                            // height: el.height,
+                            // weight: el.weight,
+                            // life_span: el.life_span,
+                            image: el.image,
+                        }
+                        array.push(datosSolicitados)
+                    }
     
-// });
+                })
+    
+                res.send(array)
+                // console.log(array);
+    
+            } else {
+    
+                res.status(404).send();
+    
+            }
+        })
+    } else {
+
+        if (name) {
+            filter = {
+                where: {
+                    name: {
+                        [Op.like]: `${name}%`
+                    }
+                }
+            };
+        }
+    
+        Breed.findAll(filter).then((breed) => {
+            res.send(breed)
+        })
+    }
 
 
-// router.get('/',  (req, res) => {
-// if(req.query){
-//     res.send("recibiendo los que llamamos query")
-// }
-// if (req.params) {
-//     res.send("recibido params")
+    
 
-// }
-// res.send('nulo')
+})
 
-// const {allQuery} = req.query;
-// const {allParams} = req.params;
+// router.get('/', (req, res) => {
 
-// if(allQuery) {
-//     res.send("recibido por query")
-// } 
+    
 
-// });
-
-
-
-
-
-
-// router.post('/', async function (req, res){
-//     let {id, name, height, weight, life_span} =  req.body;
-
-//    let breedTemp = [];
-
-//     if(!id && !name && !height && weight && life_span){
-
-//         res.sendStatus(422).json({error: "No se recibieron los parámetros necesarios para crear la raza"})
-//     } else {
-
-//         let objBreed = {
-//             id,
-//             name,
-//             height,
-//             weight,
-//             life_span
-//         }
-//         breedTemp.push(objBreed)
-//         res.send("Parámetros recibidos correctamente")
-//     }
-
-
-// if(id && name && height && weight && life_span){
-//     try {
-
-//         let breedCreated = await Breed.findOrCreate({
-//             where:{
-//                 id,
-//                 name,
-//                 height,
-//                 weight,
-//                 life_span
-//             }
-//         })
-
-//     } catch (error) {
-//         res.sendStatus(422).json({error: "Datos incorrectos"})
-//     }
-// }
-
-
+    
 
 // })
 
-// router.get('/:idRaza', async function (req, res) {
 
-//     let { idRaza } = req.params
+router.get('/:idRaza', (req, res) => {
 
-//     await fetch(`https://api.thedogapi.com/v1/breeds/search?q=${idRaza}`)
+    let { idRaza } = req.params;
+
+    Breed.findAll().then((breed) => {
+        if (breed) {
+
+            var array = [];// array para guardar los datos seleccionados
+            breed.map((el) => { // mapea cada elemento
+                if (el.name === idRaza) {
+                    let datosSolicitados = {    //objeto con los datos escenciales
+                        // id: el.id,
+                        name: el.name,
+                        height: el.height,
+                        weight: el.weight,
+                        life_span: el.life_span,
+                        image: el.image
+                    }
+                    array.push(datosSolicitados)
+
+                }
+
+            })
+
+            res.send(array)
+
+        } else {
+
+            res.status(404).send();
+
+        }
+    })
+
+})
 
 
-// })
 
 module.exports = router;
