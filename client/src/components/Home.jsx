@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Home.css';
 import { connect } from 'react-redux';
-import    allBreeds   from '../actions';
+import  { showBreeds } from '../actions';
 import Card from './Card';
 
 
@@ -9,7 +9,7 @@ import Card from './Card';
 function Home (props){
 
     useEffect(()=>{
-        props.allBreeds()
+        props.showBreeds()
     }, []) 
     function renderBreeds() {
         return (props.breeds.map((el, index)=>{
@@ -30,19 +30,18 @@ function Home (props){
     }
 
     return (
-        <>
+        <div>
 
+        <div className="contenedorbusqueda">
 
-        <div className="">
+        <div className="searchbar">
             <form action="">
                 
                     <input type="search"className="css-input" placeholder="Search breed here" />
 
             
             </form>
-  </div>
-  <br />
- 
+  </div> 
 
   <div>
       <select defaultValue={'DEFAULT'}>
@@ -54,6 +53,9 @@ function Home (props){
         <option value="5">Loyal</option>
     </select>
     </div>
+
+        </div>
+        
         <div className="tarjeta">
 
         <div className="cardContainer" >        
@@ -63,7 +65,7 @@ function Home (props){
     
     
         
-        </>
+        </div>
     )
 
 }
@@ -75,4 +77,4 @@ function mapStateToProps(state) {
     
 }
 
-export default connect(mapStateToProps, { allBreeds })(Home);
+export default connect(mapStateToProps, { showBreeds })(Home);

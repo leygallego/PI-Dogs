@@ -15,6 +15,11 @@
     text-align: center;
   }
 
+  /* .card{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+  } */
+
   .card:hover {
     box-shadow: 0 8px 16px 0 rgba(133, 127, 216, 0.2);
   }

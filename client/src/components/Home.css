@@ -1,8 +1,30 @@
-body{
+
+contenedorbusqueda{
+    display: grid;
+    grid-template-rows: 1/4;
+    width: 310px;
+     height: 55px;
+     margin-top: 25%;
+}
+
+select{
+    width: 310px;
+    height: 55px;
+    margin-top: 25px;
+    border: none;
+    outline: none;
+}
+
+input{
+    width: 310px;
+    height: 55px;
+}
+
+/* body{
     padding: 0;
     margin: 0;
-}
-select{
+} */
+/* select{
 
     display: flex;
     margin-left: -430px;
@@ -15,8 +37,7 @@ select{
      height: 55px;
     padding: 10px 20px;
     appearance: none;
-    /* -webkit-appearance: none;
-    -moz-appearance: none; */
+   
     font-family: 'Poppins',sans-serif;
     font-weight: 600;
     font-size: 20px;
@@ -38,11 +59,11 @@ select{
 }
 select::-ms-expand{
     display: none;
-}
+} */
 /* select:hover{
     border: 6px solid rgb(34, 8, 179);
 } */
-select option{
+/* select option{
     background-color: #D0A9F5;
     letter-spacing: 1.2px;
     font-weight: 400;
@@ -50,10 +71,10 @@ select option{
 }
 .selected{
     display: none;
-}
+} */
 
 
-.css-input {
+/* .css-input {
     display: flex;
     margin-top: 100px;
      margin-left: 50px;
@@ -72,7 +93,6 @@ select option{
      border-radius: 5px;
      border-width: 1px;
      border-style: solid;
-     /* background-image: url("../images/Button.png"); */
     background-repeat: no-repeat;
     background-size: 47px;
     background-position: 267px 0.5px;
@@ -107,17 +127,14 @@ select option{
 .myButton:active {
 	position:relative;
 	top:1px;
-}
+} */
 
 .tarjeta{
 
     display: flex;
     justify-content: center;
     background-color: transparent;
-    margin-top: 50px;
-
-  
-    
+    margin-top: 50px;   
 }
 .cardContainer{
     display: flex;
@@ -127,3 +144,16 @@ select option{
     height: 700px;
     overflow: scroll;
 }
+
+/* .tarjeta{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column: 2 / 3;
+
+} */
+
+/* .cardContainer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    
+} */

@@ -1,6 +1,12 @@
-export const SHOWALL = "SHOWALL";
+import axios from 'axios';
 
-export default function showBreeds() {
+
+export const SHOWALL = "SHOWALL";
+export const POSTTEMPERAMENT = "POSTTEMPERAMENT";
+
+
+
+export function showBreeds() {
 
     return (dispatch, getState) => {
         fetch('http://localhost:3001/dogs')
@@ -14,6 +20,20 @@ export default function showBreeds() {
         })
     }
     
+}
+
+export function addTemperament(payload){
+
+    return (dispatch, getState) => {
+        dispatch({
+            type: POSTTEMPERAMENT
+        });
+        axios.post('http://localhost:3001/temperament', payload)
+        .then((response)=>{
+            console.log("Posteado");
+        })
+    }
+
 }
 
 //await fetch(`https://api.thedogapi.com/v1/breeds`)

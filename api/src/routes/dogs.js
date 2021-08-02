@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const express = require('express');
 const { Breed, Temperament } = require('../db');
 // const { response } = require('../app');
-const { Sequelize } = require('sequelize');
+const { Sequelize, Model } = require('sequelize');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const server = express();
@@ -12,47 +12,47 @@ const router = Router();
 const { Op } = Sequelize;
 
 
-// router.get('/',  (req, res) => {
-//     // res.send('HOME DEL BACK (SOLO "/")')
-//     Breed.sync()
-//         .then( async () => {
-//             const allData = await Breed.findAll()
-//             if (allData > 0){
-//                 res.send(allData)
-
-//             } else {
-
-//                 getBreedApi()
-//             }
-//         } )
-// });
-
-//             function  getBreedApi() {
-//                 const url = "https://api.thedogapi.com/v1/breeds";
-//                 fetch(url)
-//                 .then((data) => data.json())
-//                 .then((result)=> {
-//                     result.map((el)=> {
-//                         Breed.sync()
-//                         .then( async ()=>{
-//                             const createdBreeds = await Breed.create(
-//                                 {
-//                                     // id: el.id,
-//                                     name: el.name,
-//                                     height: el.height.metric,
-//                                     weight: el.weight.metric,
-//                                     life_span: el.life_span,
-//                                     image: el.image.url, 
-//                                 }
-//                             )
-//                             console.log("Created breeds");
-
-//                         })
-//                     })
-//                     // res.send(createBreeds)
-//                 })
-//                 .catch(error => console.log(error)) ;
-//             }
+router.get('/',  (req, res) => {
+    // res.send('HOME DEL BACK (SOLO "/")')
+    Breed.sync()
+        .then( async () => {
+            const allData = await Breed.findAll({
+                include: Temperament,
+                attributes: {exclude: ["updatedAt", "createdAt"]}
+            })
+            if (allData.length > 0){
+                res.send(allData) // 
+            } else {
+                getBreedApi()
+            }
+        } )
+});
+            function  getBreedApi() {
+                const url = "https://api.thedogapi.com/v1/breeds";
+                fetch(url)
+                .then((data) => data.json())
+                .then((result)=> {
+                    result.map((el)=> {
+                        Breed.sync()
+                        .then( async ()=>{
+                            const createdBreeds = await Breed.create(
+                                {
+                                    // id: el.id,
+                                    name: el.name,
+                                    height: el.height.metric,
+                                    weight: el.weight.metric,
+                                    life_span: el.life_span,
+                                    image: el.image.url, 
+                                    temperament: el.temperament
+                                }
+                            )
+                            console.log("Created breeds");
+                        })
+                    })
+                    // res.send(createBreeds)
+                })
+                .catch(error => console.log(error)) ;
+            }
 
 router.get('/', (req, res) => {
 
@@ -111,13 +111,6 @@ router.get('/', (req, res) => {
 
 })
 
-// router.get('/', (req, res) => {
-
-    
-
-    
-
-// })
 
 
 router.get('/:idRaza', (req, res) => {
@@ -148,7 +141,7 @@ router.get('/:idRaza', (req, res) => {
 
         } else {
 
-            res.status(404).send();
+            res.status(404).json({error: "No se encuentra la raza ingresada"});
 
         }
     })

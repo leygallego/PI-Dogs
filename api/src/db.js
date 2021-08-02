@@ -35,8 +35,8 @@ const { Breed, Temperament } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Temperament.belongsToMany(Breed, {through: 'breed_temperament'});
-Breed.belongsToMany(Temperament, {through: 'breed_temperament'});
+Temperament.belongsToMany(Breed, {foreingKey: "BreedId", through: 'breed_temperament'});
+Breed.belongsToMany(Temperament, {foreingKey: "TemperamentId",through: 'breed_temperament'});
 
 
 module.exports = {
